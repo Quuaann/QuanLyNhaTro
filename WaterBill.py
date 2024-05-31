@@ -1,0 +1,326 @@
+
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QTableWidget,QMessageBox
+from PyQt5.QtGui import QIcon
+import ConnectDB,ElectricBillDB
+
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(920, 597)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        MainWindow.setFont(font)
+        MainWindow.setStyleSheet("background: rgb(255, 255, 255)")
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.SearchButton = QtWidgets.QPushButton(self.centralwidget)
+        self.SearchButton.setGeometry(QtCore.QRect(830, 70, 71, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.SearchButton.setFont(font)
+        self.SearchButton.setStyleSheet("background: rgb(170, 85, 255);\n"
+"color: rgb(255, 255, 255);")
+        self.SearchButton.setObjectName("SearchButton")
+        self.SearchText = QtWidgets.QPlainTextEdit(self.centralwidget)
+        self.SearchText.setGeometry(QtCore.QRect(670, 70, 141, 31))
+        self.SearchText.setObjectName("SearchText")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(390, 10, 281, 41))
+        font = QtGui.QFont()
+        font.setFamily("MS Shell Dlg 2")
+        font.setPointSize(22)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label.setFont(font)
+        self.label.setStyleSheet("color: rgb(0, 85, 255);")
+        self.label.setObjectName("label")
+
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(20, 80, 91, 16))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.BackButton = QtWidgets.QPushButton(self.centralwidget)
+        self.BackButton.setGeometry(QtCore.QRect(30, 10, 80, 30))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.BackButton.setFont(font)
+        self.BackButton.setText("back")
+        self.BackButton.setObjectName("BackButton")
+
+        self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
+        self.stackedWidget.setGeometry(QtCore.QRect(10, 120, 911, 431))
+        self.stackedWidget.setObjectName("stackedWidget")
+        self.DTNV = QtWidgets.QWidget()
+        self.DTNV.setObjectName("DTNV")
+
+        self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
+        self.tableWidget.setGeometry(QtCore.QRect(10, 70, 500, 300))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.tableWidget.setFont(font)
+        self.tableWidget.setObjectName("TB_DTNV")
+        self.tableWidget.setColumnCount(4)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.stackedWidget.addWidget(self.DTNV)
+
+        rows = ConnectDB.getAllWater()
+        self.showTable(rows)
+        #Goi ham dua du lieu len table
+        item = QtWidgets.QTableWidgetItem()
+
+
+        self.SPBC = QtWidgets.QWidget()
+        self.SPBC.setObjectName("SPBC")
+        self.TB_SPBC = QtWidgets.QTableWidget(self.SPBC)
+        self.TB_SPBC.setGeometry(QtCore.QRect(10, 10, 881, 411))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.TB_SPBC.setFont(font)
+        self.TB_SPBC.setObjectName("TB_SPBC")
+        self.TB_SPBC.setColumnCount(9)
+        self.TB_SPBC.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.TB_SPBC.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.TB_SPBC.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.TB_SPBC.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.TB_SPBC.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.TB_SPBC.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.TB_SPBC.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.TB_SPBC.setHorizontalHeaderItem(6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.TB_SPBC.setHorizontalHeaderItem(7, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.TB_SPBC.setHorizontalHeaderItem(8, item)
+        self.stackedWidget.addWidget(self.SPBC)
+        self.DTCT = QtWidgets.QWidget()
+        self.DTCT.setObjectName("DTCT")
+        self.stackedWidget.addWidget(self.DTCT)
+
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 920, 21))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        
+        self.btnRefresh = QtWidgets.QPushButton(self.centralwidget)
+        self.btnRefresh.setGeometry(QtCore.QRect(400,450 , 93, 29))
+        self.btnRefresh.setObjectName("btnRefresh")
+
+        self.btnAdd = QtWidgets.QPushButton(self.centralwidget)
+        self.btnAdd.setGeometry(QtCore.QRect(550,400 , 93, 29))
+        self.btnAdd.setObjectName("btnAdd")
+
+        self.btnUpdate = QtWidgets.QPushButton(self.centralwidget)
+        self.btnUpdate.setGeometry(QtCore.QRect(650,400 , 93, 29))
+        self.btnUpdate.setObjectName("btnUpdate")
+
+        self.btnDelete = QtWidgets.QPushButton(self.centralwidget)
+        self.btnDelete.setGeometry(QtCore.QRect(750,400 , 93, 29))
+        self.btnDelete.setObjectName("btnDelete")
+
+        self.txtID = QtWidgets.QTextEdit(self.centralwidget)
+        self.txtID.setGeometry(QtCore.QRect(650, 150, 71, 31))
+        self.txtID.setObjectName("txtID")
+        self.txtRoom = QtWidgets.QTextEdit(self.centralwidget)
+        self.txtRoom.setGeometry(QtCore.QRect(650, 200, 191, 31))
+        self.txtRoom.setObjectName("txtRoom")
+        self.txtNumber = QtWidgets.QTextEdit(self.centralwidget)
+        self.txtNumber.setGeometry(QtCore.QRect(650, 250, 191, 31))
+        self.txtNumber.setObjectName("txtNumber")
+        self.txtSum = QtWidgets.QTextEdit(self.centralwidget)
+        self.txtSum.setGeometry(QtCore.QRect(650, 300, 191, 31))
+        self.txtSum.setObjectName("txtSum")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(550, 150, 81, 31))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(550, 200, 71, 31))
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(550, 250, 71, 31))
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(550, 300, 71, 31))
+        self.label_4.setObjectName("label_4")
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.tableWidget.itemClicked.connect(self.getData)
+        self.btnUpdate.clicked.connect(self.update)
+        self.SearchButton.clicked.connect(self.find)
+        self.btnAdd.clicked.connect(self.add)
+        self.btnRefresh.clicked.connect(self.refresh)
+        self.btnDelete.clicked.connect(self.delete)
+
+    def add(self):
+        id = self.txtID.toPlainText()
+        name = self.txtRoom.toPlainText()
+        nu = self.txtNumber.toPlainText()
+        sum = int(nu)*30000
+        self.txtSum.setPlainText(str(sum))
+        
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Bạn có muốn thêm vào ")
+        msg.setWindowTitle("Quyết định")
+        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        returnValue = msg.exec()
+        if returnValue == QMessageBox.Ok:
+            ElectricBillDB.addWaterBill(int(id),int(name),int(nu),int(sum))
+            rows = ConnectDB.getAllWater()
+            self.showTable(rows)
+
+
+    def refresh(self) :
+        rows = ConnectDB.getAllWater()
+        self.showTable(rows)
+
+        self.txtID.setPlainText("")
+        self.txtRoom.setPlainText("")
+        self.txtNumber.setPlainText("")
+        self.txtSum.setPlainText("")
+
+    def getData(self) :
+        id = self.tableWidget.currentRow()
+        self.txtID.setPlainText(self.tableWidget.item(id,0).text())
+        self.txtRoom.setPlainText(self.tableWidget.item(id,1).text())
+        self.txtNumber.setPlainText(self.tableWidget.item(id,2).text())
+        self.txtSum.setPlainText(self.tableWidget.item(id,3).text())
+
+    def delete(self):
+        id = self.txtID.toPlainText()
+
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Bạn có muốn xóa hóa đơn mã "+id)
+        msg.setWindowTitle("Quyết định")
+        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        returnValue = msg.exec()
+        if returnValue == QMessageBox.Ok:
+            ElectricBillDB.deleteWater(int(id))
+            rows = ConnectDB.getAllWater()
+            self.showTable(rows)
+
+
+    def find(self):
+        id = self.txtID.toPlainText()
+        rows = ElectricBillDB.findByidWater(int(id))
+
+        if(len(rows)==0):
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("Không tìn thấy phòng có mã phòng là :"+self.txtID.toPlainText())
+            msg.setWindowTitle("Error")
+            msg.exec()
+
+        self.showTable(rows)
+
+    def update(self):
+        id = self.txtID.toPlainText()
+        name = self.txtRoom.toPlainText()
+        nu = self.txtNumber.toPlainText()
+        sum = int(nu)*30000
+        self.txtSum.setPlainText(str(sum))
+        
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Bạn có muốn cập nhật")
+        msg.setWindowTitle("Quyết định")
+        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        returnValue = msg.exec()
+        if returnValue == QMessageBox.Ok:
+            ElectricBillDB.updateWaterBill(int(id),int(name),int(nu),int(sum))
+            rows = ConnectDB.getAllWater()
+            self.showTable(rows)
+
+    def showTable(self,rows):
+        self.tableWidget.setRowCount(len(rows))
+        for i in range(0,len(rows)) :
+            item = QtWidgets.QTableWidgetItem(str(rows[i][0]))
+            self.tableWidget.setItem(i,0,item)
+            item = QtWidgets.QTableWidgetItem(str(rows[i][1]))
+            self.tableWidget.setItem(i,1,item)
+            item = QtWidgets.QTableWidgetItem(str(rows[i][2]))
+            self.tableWidget.setItem(i,2,item)
+            item = QtWidgets.QTableWidgetItem(str(rows[i][3]))
+            self.tableWidget.setItem(i,3,item)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.btnRefresh.setText(_translate("MainWindow", "Refresh"))
+        self.btnAdd.setText(_translate("MainWindow", "Thêm"))
+        self.btnUpdate.setText(_translate("MainWindow", "Sửa"))
+        self.btnDelete.setText(_translate("MainWindow", "Xóa"))
+        self.SearchButton.setText(_translate("MainWindow", "Search"))
+        self.label.setText(_translate("MainWindow", "Water Bill"))
+        self.label_2.setText(_translate("MainWindow", "Statistical:"))
+        item = self.tableWidget.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "ID"))
+        item = self.tableWidget.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "Mã Phòng"))
+        item = self.tableWidget.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Số nước"))
+        item = self.tableWidget.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "Tổng"))
+    
+        item = self.TB_SPBC.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "STT"))
+        item = self.TB_SPBC.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "ID Sản Phẩm"))
+        item = self.TB_SPBC.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Tên Sản Phẩm"))
+        item = self.TB_SPBC.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "Giá"))
+        item = self.TB_SPBC.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Tồn Kho"))
+        item = self.TB_SPBC.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "Đã Bán"))
+        item = self.TB_SPBC.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "Tình Trạng"))
+        item = self.TB_SPBC.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "Đánh Giá"))
+        item = self.TB_SPBC.horizontalHeaderItem(8)
+        item.setText(_translate("MainWindow", "Ghi Chú"))
+
+        self.label.setText(_translate("MainWindow", "Mã hoa don :"))
+        self.label_2.setText(_translate("MainWindow", "Tên phòng :"))
+        self.label_3.setText(_translate("MainWindow", "So dien :"))
+        self.label_4.setText(_translate("MainWindow", "Tien dien :"))
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
